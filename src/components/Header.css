@@ -1,0 +1,137 @@
+/* Общий стиль шапки */
+.header {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Высота шапки уменьшена */
+    background-image: url('https://via.placeholder.com/1920x150'); /* Временная картинка */
+    background-size: cover; /* Покрывает всю шапку */
+    background-position: center; /* Центрируем изображение */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer; /* Указываем, что шапка кликабельна */
+  }
+  
+  /* Контейнер для контента шапки */
+  .header-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20px; /* Отступы внутри шапки */
+    box-sizing: border-box;
+  }
+  
+  /* Правая часть (поиск и кнопки) */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Расстояние между элементами */
+  }
+  
+  /* Иконки */
+  .header-icon {
+    text-decoration: none;
+    color: white;
+    font-size: 24px; /* Размер иконок */
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .header-icon:hover {
+    color: #FFD700;
+    transform: scale(1.1); /* Увеличение при наведении */
+  }
+  
+  /* Строка поиска */
+  .search-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .search-bar {
+    padding: 8px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .search-bar:focus {
+    border-color: #FFD700;
+    box-shadow: 0 0 10px #FFD700;
+  }
+  
+  .close-search-button {
+    background: #FF5722;
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .close-search-button:hover {
+    background: #FF7043;
+  }
+  
+  /* Кнопка "Поиск" */
+  .search-button {
+    background: #FFD700;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .search-button:hover {
+    background: #FFB800;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .header {
+      height: 80px; /* Уменьшаем высоту на планшетах */
+    }
+  
+    .search-bar {
+      font-size: 14px;
+      padding: 6px;
+    }
+  
+    .search-button,
+    .close-search-button,
+    .header-icon {
+      font-size: 20px; /* Уменьшаем размер иконок */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header {
+      height: 70px; /* Ещё меньше на мобильных */
+    }
+  
+    .search-bar {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .search-button,
+    .close-search-button,
+    .header-icon {
+      font-size: 18px; /* Ещё меньше размер на мобильных */
+    }
+  }
+  
