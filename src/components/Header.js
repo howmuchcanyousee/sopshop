@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import './Header.css';
 
 function Header() {
+  const [isMenuOpen, setMenuOpen] = useState(false); // Состояние меню
   const [isSearchVisible, setSearchVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!isMenuOpen);
+  };
 
   const toggleSearch = () => {
     setSearchVisible(!isSearchVisible);
@@ -12,9 +17,17 @@ function Header() {
     <header className="header" onClick={() => (window.location.href = "/")}>
       <div className="header-content">
         <div className="header-left">
-          {/* Логотип убран */}
+          {/* Значок меню */}
+          <div className="menu-icon" onClick={(e) => {
+            e.stopPropagation(); // Останавливаем всплытие, чтобы не сработал переход на главную
+            toggleMenu();
+          }}>
+            <div className="menu-bar"></div>
+            <div className="menu-bar"></div>
+            <div className="menu-bar"></div>
+          </div>
         </div>
-        <div className="header-right">
+        <div className={`header-right ${isMenuOpen ? 'menu-open' : ''}`}>
           {isSearchVisible && (
             <div className="search-container">
               <input
@@ -25,7 +38,7 @@ function Header() {
               <button
                 className="close-search-button"
                 onClick={(e) => {
-                  e.stopPropagation(); // Останавливаем всплытие, чтобы не сработал переход на главную
+                  e.stopPropagation(); // Останавливаем всплытие
                   toggleSearch();
                 }}
               >
@@ -41,7 +54,7 @@ function Header() {
                 toggleSearch();
               }}
             >
-              <i className="fas fa-search"></i>
+              <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           )}
           <a href="/favorites" className="header-icon">

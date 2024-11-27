@@ -3,7 +3,7 @@
     position: relative;
     width: 100%;
     height: 100px; /* Высота шапки уменьшена */
-    background-image: url('https://via.placeholder.com/1920x150'); /* Временная картинка */
+    background-image: url('../assets/header-bg.png');
     background-size: cover; /* Покрывает всю шапку */
     background-position: center; /* Центрируем изображение */
     display: flex;
@@ -37,13 +37,13 @@
   /* Иконки */
   .header-icon {
     text-decoration: none;
-    color: white;
+    color: #1d3442;
     font-size: 24px; /* Размер иконок */
     transition: color 0.3s ease, transform 0.3s ease;
   }
   
   .header-icon:hover {
-    color: #FFD700;
+    color: #df4d4d;
     transform: scale(1.1); /* Увеличение при наведении */
   }
   
@@ -56,7 +56,7 @@
   
   .search-bar {
     padding: 8px;
-    font-size: 16px;
+    font-size: 15px;
     border: 2px solid #ddd;
     border-radius: 30px;
     outline: none;
@@ -64,41 +64,50 @@
   }
   
   .search-bar:focus {
-    border-color: #FFD700;
-    box-shadow: 0 0 10px #FFD700;
+    border-color: #1d3442;
+    box-shadow: 0 0 10px #1d3442;
   }
   
-  .close-search-button {
-    background: #FF5722;
-    color: white;
-    border: none;
-    padding: 8px;
-    font-size: 16px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
+  /* Кнопка закрытия поиска */
+.close-search-button {
+  background: #e5fff5;
+  color: #FF5722;
+  border: none;
+  padding: 8px;
+  font-size: 22px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Эффект увеличения при наведении */
+.close-search-button:hover {
+  transform: scale(1.2); /* Увеличение на 20% */
+}
+
   
-  .close-search-button:hover {
-    background: #FF7043;
-  }
+
   
   /* Кнопка "Поиск" */
-  .search-button {
-    background: #FFD700;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
-  }
+.search-button {
+  background: #e5fff5;
+  color: #1d3442;
+  border: none;
+  padding: 10px;
+  font-size: 23px;
+  font-weight: bold;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Эффект подсветки при наведении */
+.search-button:hover {
+  background: #c0ffe3; /* Меняем цвет фона */
+  box-shadow: 0 0 30px rgba(0, 255, 150, 0.5); /* Добавляем подсветку */
+}
   
-  .search-button:hover {
-    background: #FFB800;
-  }
+
   
   /* Адаптивность */
   @media (max-width: 768px) {

@@ -1,3 +1,15 @@
+body {
+  background-image: url('./assets/background.jpg');
+  background-size: cover; /* Масштабируем изображение, чтобы оно покрывало весь экран */
+  background-position: center; /* Центрируем изображение */
+  background-repeat: no-repeat; /* Убираем повтор изображения */
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif; /* Общий шрифт сайта */
+}
+
+
+
 /* Общий стиль приложения */
 .App {
   font-family: 'Poppins', sans-serif;
@@ -10,7 +22,7 @@
 .brands-slider {
   width: 100%;
   overflow: hidden; /* Скрываем содержимое за пределами контейнера */
-  background-color: #f4f4f4;
+  background: transparent; /* Делаем фон прозрачным */
   padding: 20px 0;
   position: relative;
 }
@@ -27,20 +39,25 @@
   flex-shrink: 0;
   width: 150px; /* Ширина картинки */
   height: 100px; /* Высота картинки */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.404); /* Тень */
+  border-radius: 10px; /* Скруглённые края */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.brand-item:hover {
+  transform: scale(1.1); /* Увеличение при наведении */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Усиление тени при наведении */
 }
 
 .brand-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Обрезка изображения для сохранения пропорций */
-  border-radius: 10px; /* Скруглённые края */
-  transition: transform 0.3s ease-in-out;
+  object-fit: cover;
 }
 
-.brand-image:hover {
-  transform: scale(1.1); /* Увеличение при наведении */
-}
 
+/* Секция баннеров */
 /* Секция баннеров */
 .banner-slider {
   position: relative;
@@ -51,7 +68,7 @@
 
 .banner-container {
   display: flex;
-  transition: transform 0.8s ease-in-out; /* Плавное смещение */
+  transition: transform 0.5s ease; /* Плавное переключение */
 }
 
 .banner {
@@ -63,13 +80,47 @@
   width: 100%;
   height: 100%;
   object-fit: cover; /* Подгоняет изображение под размер баннера */
-  border-radius: 10px;
+  border-radius: 0px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Тень */
 }
+
+/* Стрелки для переключения */
+.banner-arrow {
+  position: absolute;
+  top: 37%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.301);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease;
+}
+
+.banner-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.banner-arrow-left {
+  left: 20px;
+}
+
+.banner-arrow-right {
+  right: 20px;
+}
+
 
 /* Секция новинок */
 .new-products {
-  margin-top: 10px; /* Минимальный отступ сверху */
-  margin-bottom: 20px; /* Оставляем небольшой отступ снизу */
+  margin-top: -145px; /* Минимальный отступ сверху */
+  margin-bottom: 40px; /* Оставляем небольшой отступ снизу */
   text-align: center;
 }
 
@@ -91,6 +142,8 @@
   width: 200px;
   height: 200px;
   cursor: pointer;
+  border-radius: 10px; /* Скруглённые края */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); /* Тень */
 }
 
 .product-image {
@@ -128,6 +181,7 @@
   text-align: center;
 }
 
+/* Модальное окно */
 .modal-images {
   display: flex;
   gap: 10px;
@@ -140,6 +194,13 @@
   height: 80px;
   object-fit: cover;
   border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.modal-image.zoomed {
+  transform: scale(5); /* Увеличение в 2 раза */
+  z-index: 1;
 }
 
 .size-selector {
