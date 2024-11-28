@@ -5,7 +5,20 @@ import banner1 from './assets/banner1.png';
 import banner2 from './assets/banner2.png';
 import banner3 from './assets/banner3.png';
 import banner4 from './assets/banner4.png';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CartPage from './pages/CartPage';
+import FavoritesPage from './pages/FavoritesPage';
 function App() {
+  const [cart, setCart] = useState([]); // Это будет содержать товары в корзине
+  const [favorites, setFavorites] = useState([]); // Это будет содержать избранные товары
+
+  // Пример добавления товара в корзину или избранное
+  const addToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
+  const addToFavorites = (product) => {
+    setFavorites((prevFavorites) => [...prevFavorites, product]);
+  };
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
@@ -93,7 +106,7 @@ const handlePrev = () => {
     alert(`${action} добавлен: ${selectedProduct.name}, размер: ${selectedSize}`);
     closeModal();
   };
-
+  
   return (
     <div className="App">
       <Header />
@@ -212,54 +225,59 @@ const handlePrev = () => {
 
       {/* Модальное окно */}
       {isModalOpen && selectedProduct && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div
-            className="modal"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3>{selectedProduct.name}</h3>
-            <div className="modal-images">
-              {selectedProduct.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`Product image ${index + 1}`}
-                  className={`modal-image ${zoomedImageIndex === index ? 'zoomed' : ''}`}
-                  onClick={() => handleImageClick(index)} // Увеличение изображения
-                />
-              ))}
-            </div>
-            <div className="size-selector">
-              <p>Выберите размер:</p>
-              <select
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
-              >
-                <option value="">Выберите</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-              </select>
-            </div>
-            <div className="modal-buttons">
-              <button
-                onClick={() => handleAddToCartOrFavorites('Товар в корзину')}
-              >
-                Добавить в корзину
-              </button>
-              <button
-                onClick={() => handleAddToCartOrFavorites('Избранное')}
-              >
-                Добавить в избранное
-              </button>
-            </div>
-            <button className="close-modal" onClick={closeModal}>
-              ✖ Закрыть
-            </button>
-          </div>
+  <div className="modal-overlay" onClick={closeModal}>
+    <div
+      className="modal"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="modal-header">
+        <h3 className="modal-title">{selectedProduct.name}</h3>
+        <button className="close-modal" onClick={closeModal}>✖</button>
+      </div>
+      <div className="modal-content">
+        <div className="modal-images">
+          {selectedProduct.images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Product image ${index + 1}`}
+              className={`modal-image ${zoomedImageIndex === index ? 'zoomed' : ''}`}
+              onClick={() => handleImageClick(index)} // Увеличение изображения
+            />
+          ))}
         </div>
-      )}
+        <div className="modal-details">
+          <p>Выберите размер:</p>
+          <select
+            value={selectedSize}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          >
+            <option value="">Выберите</option>
+            <option value="S">41</option>
+            <option value="M">42</option>
+            <option value="L">43</option>
+            <option value="XL">44</option>
+            <option value="XL">45</option>
+          </select>
+        </div>
+        <div className="modal-actions">
+          <button
+            onClick={() => handleAddToCartOrFavorites('Товар в корзину')}
+            className="modal-action-button"
+          >
+            Добавить в корзину
+          </button>
+          <button
+            onClick={() => handleAddToCartOrFavorites('Избранное')}
+            className="modal-action-button"
+          >
+            Добавить в избранное
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Импортируем Link
 import './Header.css';
 
 function Header() {
@@ -14,12 +15,12 @@ function Header() {
   };
 
   return (
-    <header className="header" onClick={() => (window.location.href = "/")}>
+    <header className="header">
       <div className="header-content">
         <div className="header-left">
           {/* Значок меню */}
           <div className="menu-icon" onClick={(e) => {
-            e.stopPropagation(); // Останавливаем всплытие, чтобы не сработал переход на главную
+            e.stopPropagation(); // Останавливаем всплытие
             toggleMenu();
           }}>
             <div className="menu-bar"></div>
@@ -27,6 +28,7 @@ function Header() {
             <div className="menu-bar"></div>
           </div>
         </div>
+
         <div className={`header-right ${isMenuOpen ? 'menu-open' : ''}`}>
           {isSearchVisible && (
             <div className="search-container">
@@ -54,18 +56,20 @@ function Header() {
                 toggleSearch();
               }}
             >
-              <i class="fa fa-search" aria-hidden="true"></i>
+              <i className="fas fa-search"></i>
             </button>
           )}
-          <a href="/favorites" className="header-icon">
+
+          {/* Используем Link для перехода на страницы избранного и корзины */}
+          <Link to="/favorites" className="header-icon">
             <i className="fas fa-heart"></i>
-          </a>
-          <a href="/cart" className="header-icon">
+          </Link>
+          <Link to="/cart" className="header-icon">
             <i className="fas fa-shopping-cart"></i>
-          </a>
-          <a href="/account" className="header-icon">
+          </Link>
+          <Link to="/account" className="header-icon">
             <i className="fas fa-user"></i>
-          </a>
+          </Link>
         </div>
       </div>
     </header>
