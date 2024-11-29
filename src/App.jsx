@@ -10,10 +10,9 @@ import banner3 from './assets/banner3.png';
 import banner4 from './assets/banner4.png';
 
 function App() {
-  const [cart, setCart] = useState([]); // Это будет содержать товары в корзине
-  const [favorites, setFavorites] = useState([]); // Это будет содержать избранные товары
-
-  // Пример добавления товара в корзину или избранное
+  const [cart, setCart] = useState([]); 
+  const [favorites, setFavorites] = useState([]); 
+// шаблон
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
@@ -102,181 +101,199 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        
-        {/* Секция с кнопками брендов */}
-        <div className="brands-slider">
-          <div className="brands-container">
-            <Link to="/brand/nike" className="brand-item">
-              <img
-                src={require('./assets/nike.png')}
-                alt="Nike"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/adidas" className="brand-item">
-              <img
-                src={require('./assets/adidas.png')}
-                alt="Adidas"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/puma" className="brand-item">
-              <img
-                src={require('./assets/puma.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/nb" className="brand-item">
-              <img
-                src={require('./assets/NB.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/under_armour" className="brand-item">
-              <img
-                src={require('./assets/under_armour.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/reebok" className="brand-item">
-              <img
-                src={require('./assets/reebok.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/converse" className="brand-item">
-              <img
-                src={require('./assets/converse.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/vans" className="brand-item">
-              <img
-                src={require('./assets/vans.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/jordan" className="brand-item">
-              <img
-                src={require('./assets/jordan.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-            <Link to="/brand/fila" className="brand-item">
-              <img
-                src={require('./assets/fila.png')}
-                alt="Puma"
-                className="brand-image"
-              />
-            </Link>
-          </div>
-        </div>
-
-        {/* Секция с баннерами */}
-        <div className="banner-slider">
-          <div
-            className="banner-container"
-            style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
-            }}
-          >
-            {banners.map((banner, index) => (
-              <div className="banner" key={index}>
-                <img src={banner} alt={`Banner ${index + 1}`} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Секция с новинками */}
-        <div className="new-products">
-          <h2 className="section-title">Новинки</h2>
-          <div className="products-container">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="product-item"
-                onClick={() => openModal(product)}
-              >
-                <img
-                  src={product.images[0]}
-                  alt={product.name}
-                  className="product-image"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Модальное окно */}
-        {isModalOpen && selectedProduct && (
-          <div className="modal-overlay" onClick={closeModal}>
-            <div
-              className="modal"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="modal-header">
-                <h3 className="modal-title">{selectedProduct.name}</h3>
-                <button className="close-modal" onClick={closeModal}>✖</button>
-              </div>
-              <div className="modal-content">
-                <div className="modal-images">
-                  {selectedProduct.images.map((image, index) => (
-                    <img
-                      key={index}
-                      src={image}
-                      alt={`Product image ${index + 1}`}
-                      className={`modal-image ${zoomedImageIndex === index ? 'zoomed' : ''}`}
-                      onClick={() => handleImageClick(index)} // Увеличение изображения
-                    />
-                  ))}
-                </div>
-                <div className="modal-details">
-                  <p>Выберите размер:</p>
-                  <select
-                    value={selectedSize}
-                    onChange={(e) => setSelectedSize(e.target.value)}
-                  >
-                    <option value="">Выберите</option>
-                    <option value="S">41</option>
-                    <option value="M">42</option>
-                    <option value="L">43</option>
-                    <option value="XL">44</option>
-                    <option value="XXL">45</option>
-                  </select>
-                </div>
-                <div className="modal-actions">
-                  <button
-                    onClick={() => handleAddToCartOrFavorites('Товар в корзину')}
-                    className="modal-action-button"
-                  >
-                    Добавить в корзину
-                  </button>
-                  <button
-                    onClick={() => handleAddToCartOrFavorites('Избранное')}
-                    className="modal-action-button"
-                  >
-                    Добавить в избранное
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
         <Routes>
+          {/* Главная страница */}
+          <Route
+            path="/"
+            element={
+              <>
+                {/* Секция с кнопками брендов */}
+                <div className="brands-slider">
+        <div className="brands-container">
+          <a href="/brand/nike" className="brand-item">
+            <img
+              src={require('./assets/nike.png')}
+              alt="Nike"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/adidas" className="brand-item">
+            <img
+              src={require('./assets/adidas.png')}
+              alt="Adidas"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/puma" className="brand-item">
+            <img
+              src={require('./assets/puma.png')}
+              alt="Puma"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/new-balance" className="brand-item">
+            <img
+              src={require('./assets/NB.png')}
+              alt="New Balance"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/asics" className="brand-item">
+            <img
+              src={require('./assets/under_armour.png')}
+              alt="Under Armour"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/reebok" className="brand-item">
+            <img
+              src={require('./assets/reebok.png')}
+              alt="Reebok"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/converse" className="brand-item">
+            <img
+              src={require('./assets/converse.png')}
+              alt="Converse"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/vans" className="brand-item">
+            <img
+              src={require('./assets/vans.png')}
+              alt="Vans"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/jordan" className="brand-item">
+            <img
+              src={require('./assets/jordan.png')}
+              alt="Jordan"
+              className="brand-image"
+            />
+          </a>
+          <a href="/brand/fila" className="brand-item">
+            <img
+              src={require('./assets/fila.png')}
+              alt="Fila"
+              className="brand-image"
+            />
+          </a>
+        </div>
+      </div>
+
+                {/* Секция с баннерами */}
+                <div className="banner-slider">
+                  <div
+                    className="banner-container"
+                    style={{
+                      transform: `translateX(-${currentIndex * 100}%)`,
+                    }}
+                  >
+                    {banners.map((banner, index) => (
+                      <div className="banner" key={index}>
+                        <img src={banner} alt={`Banner ${index + 1}`} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Секция с новинками */}
+                <div className="new-products">
+                  <h2 className="section-title">Новинки</h2>
+                  <div className="products-container">
+                    {products.map((product) => (
+                      <div
+                        key={product.id}
+                        className="product-item"
+                        onClick={() => openModal(product)}
+                      >
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="product-image"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            }
+          />
+
+          {/* Страницы корзины и избранного */}
           <Route path="/cart" element={<CartPage cart={cart} />} />
-          <Route path="/favorites" element={<FavoritesPage favorites={favorites} />} />
+          <Route
+            path="/favorites"
+            element={<FavoritesPage favorites={favorites} />}
+          />
         </Routes>
+           
+
+       {/* Модальное окно */}
+{isModalOpen && selectedProduct && (
+  <div className="modal-overlay" onClick={closeModal}>
+    <div className="modal" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-header">
+        <h3 className="modal-title">{selectedProduct.name}</h3>
+        <button className="close-modal" onClick={closeModal}>
+        </button>
+        <button className="close-modal" onClick={closeModal}>
+          <i className="fas fa-times"></i> 
+        </button>
+        
+        <button
+          className="add-to-favorites"
+          onClick={() => handleAddToCartOrFavorites('Избранное')}
+        >
+          <i className="fas fa-heart"></i>
+        </button>
+      </div>
+
+      <div className="modal-content">
+        <div className="modal-images">
+          {selectedProduct.images.map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Product image ${index + 1}`}
+              className={`modal-image ${zoomedImageIndex === index ? 'zoomed' : ''}`}
+              onClick={() => handleImageClick(index)}
+            />
+          ))}
+        </div>
+        <div className="modal-details">
+          <select
+            value={selectedSize}
+            onChange={(e) => setSelectedSize(e.target.value)}
+          >
+            <option value="">Выберите размер</option>
+            <option value="S">41</option>
+            <option value="M">42</option>
+            <option value="L">43</option>
+          </select>
+          
+        </div>
+        <div className="modal-actions">
+          <button
+            onClick={() => handleAddToCartOrFavorites('Товар в корзину')}
+            className="modal-action-button"
+          >
+            Добавить в корзину
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
+
+              
       </div>
     </Router>
   );
 }
+
 
 export default App;

@@ -1,16 +1,15 @@
 body {
   background-image: url('./assets/background.jpg');
-  background-size: cover; /* Масштабируем изображение, чтобы оно покрывало весь экран */
-  background-position: center; /* Центрируем изображение */
-  background-repeat: no-repeat; /* Убираем повтор изображения */
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif; /* Общий шрифт сайта */
+  font-family: 'Poppins', sans-serif; 
 }
 
 
 
-/* Общий стиль приложения */
 .App {
   font-family: 'Poppins', sans-serif;
   margin: 0;
@@ -18,11 +17,10 @@ body {
   box-sizing: border-box;
 }
 
-/* Секция брендов */
 .brands-slider {
   width: 100%;
-  overflow: hidden; /* Скрываем содержимое за пределами контейнера */
-  background: transparent; /* Делаем фон прозрачным */
+  overflow: hidden; 
+  background: transparent; 
   padding: 20px 0;
   position: relative;
 }
@@ -37,17 +35,17 @@ body {
 .brand-item {
   display: block;
   flex-shrink: 0;
-  width: 150px; /* Ширина картинки */
-  height: 100px; /* Высота картинки */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.404); /* Тень */
-  border-radius: 10px; /* Скруглённые края */
+  width: 150px; 
+  height: 100px; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.404);
+  border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
 }
 
 .brand-item:hover {
-  transform: scale(1.1); /* Увеличение при наведении */
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Усиление тени при наведении */
+  transform: scale(1.1); 
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); 
 }
 
 .brand-image {
@@ -57,34 +55,29 @@ body {
 }
 
 
-/* Секция баннеров */
-/* Секция баннеров */
 .banner-slider {
   position: relative;
   width: 100%;
-  height: 600px; /* Высота баннера */
-  overflow: hidden; /* Скрываем содержимое за пределами контейнера */
+  height: 600px;
+  overflow: hidden; 
 }
-
 .banner-container {
   display: flex;
-  transition: transform 0.5s ease; /* Плавное переключение */
+  transition: transform 0.5s ease; 
 }
-
 .banner {
-  flex: 0 0 100%; /* Каждый баннер занимает 100% ширины */
+  flex: 0 0 100%; 
   height: 100%;
 }
 
 .banner img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Подгоняет изображение под размер баннера */
+  object-fit: cover; 
   border-radius: 0px;
   box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3); /* Тень */
 }
 
-/* Стрелки для переключения */
 .banner-arrow {
   position: absolute;
   top: 37%;
@@ -117,17 +110,16 @@ body {
 }
 
 
-/* Секция новинок */
 .new-products {
-  margin-top: -145px; /* Минимальный отступ сверху */
-  margin-bottom: 40px; /* Оставляем небольшой отступ снизу */
+  margin-top: -145px;
+  margin-bottom: 40px; 
   text-align: center;
 }
 
 .section-title {
   font-size: 2rem;
   color: #333;
-  margin-bottom: 10px; /* Минимальный отступ под заголовком */
+  margin-bottom: 10px; 
 }
 
 .products-container {
@@ -254,7 +246,7 @@ body {
 }
 
 .modal-image.zoomed {
-  transform: scale(3); /* Увеличение в 3 раза */
+  transform: scale(1.5);
   z-index: 1;
 }
 
@@ -266,13 +258,30 @@ body {
 }
 
 .modal-details select {
-  padding: 8px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  border-radius: 25px; 
+  border: none; 
+  background-color: #6e6e6e; 
+  
+  color: #fff; 
+  font-weight: bold; 
+  appearance: none; 
+  outline: none; 
+  width: 31%; 
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  line-height: 1.5;
 }
 
-/* Кнопки действия */
+
+.modal-details select:hover {
+  background-color: #333; 
+  color: rgba(0, 255, 150, 0.5);
+}
+
+
 .modal-actions {
   display: flex;
   justify-content: center;
@@ -294,41 +303,78 @@ body {
 .modal-action-button:hover {
   background: #ffbb00;
 }
+.add-to-favorites {
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #919191; 
+  position: absolute;
+  bottom: 600px;
+  right: 23px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.add-to-favorites:hover {
+  color: #c0392b;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #919191; 
+  position: absolute;
+  bottom: 650px; 
+  right: 26px; 
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: rgba(0, 255, 150, 0.5);
+}
+
+.close-modal i {
+  pointer-events: none;
+}
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
 
 /* Адаптивность */
 @media (max-width: 768px) {
   .banner-slider {
-    height: 400px; /* Высота баннера на планшетах */
+    height: 400px;
   }
 
   .brands-container {
-    gap: 10px; /* Уменьшаем отступы между кнопками брендов */
+    gap: 10px;
   }
 
   .brand-item {
-    width: 120px; /* Уменьшаем размер брендов */
+    width: 120px;
     height: 80px;
   }
 
   .product-item {
-    width: 150px; /* Меньше ширина товаров */
+    width: 150px;
     height: 150px;
   }
 }
 
 @media (max-width: 480px) {
   .banner-slider {
-    height: 300px; /* Высота баннера на мобильных */
+    height: 300px; 
   }
 
   .brand-item {
-    width: 100px; /* Ещё меньше размер брендов */
+    width: 100px; 
     height: 70px;
   }
 
   .product-item {
-    width: 120px; /* Меньше ширина товаров */
+    width: 120px; 
     height: 120px;
   }
 }
