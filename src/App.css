@@ -344,8 +344,28 @@ body {
 
 /* Адаптивность */
 @media (max-width: 768px) {
-  .banner-slider {
-    height: 400px;
+  .product-item {
+    flex-direction: column;  /* Товары выстраиваются в столбик */
+    align-items: center;      /* Центрируем элементы */
+    max-width: 100%;          /* Ограничиваем ширину товара */
+  }
+
+  /* Уменьшаем шрифт и отступы для мобильных устройств */
+  .product-item h3 {
+    font-size: 1.2rem;  /* Уменьшаем размер шрифта */
+    text-align: center; /* Текст по центру */
+    margin: 10px 0;     /* Добавляем отступ */
+  }
+
+  .product-item p {
+    font-size: 1rem;  /* Уменьшаем размер шрифта для цены */
+    text-align: center; /* Текст по центру */
+    margin: 10px 0;    /* Добавляем отступ */
+  }
+
+  .product-image {
+    width: 100%;  /* Устанавливаем изображению максимальную ширину */
+    height: auto;
   }
 
   .brands-container {
@@ -358,8 +378,27 @@ body {
   }
 
   .product-item {
-    width: 150px;
-    height: 150px;
+    flex-direction: column;  /* Товары выстраиваются в столбик */
+    align-items: center;      /* Центрируем элементы */
+    max-width: 100%;          /* Ограничиваем ширину товара */
+    min-height: 280px;        /* Увеличиваем минимальную высоту на мобильных устройствах */
+  }
+
+  /* Уменьшаем шрифт и отступы для мобильных устройств */
+  .product-item h3 {
+    font-size: 1.2rem;  /* Уменьшаем размер шрифта */
+    margin: 5px 0;      /* Добавляем небольшой отступ сверху и снизу */
+  }
+
+  .product-item p {
+    font-size: 1rem;  /* Уменьшаем размер шрифта для цены */
+    margin: 5px 0;    /* Добавляем отступ */
+  }
+
+  .product-image {
+    width: 80%;  /* Ограничиваем изображение для мобильных устройств */
+    height: auto;
+    max-width: 120px; /* Ограничиваем максимальный размер */
   }
 }
 
@@ -368,13 +407,16 @@ body {
     height: 300px; 
   }
 
-  .brand-item {
-    width: 100px; 
-    height: 70px;
+  .product-item h3 {
+    font-size: 1rem;  /* Еще уменьшаем шрифт */
   }
 
-  .product-item {
-    width: 120px; 
-    height: 120px;
+  .product-item p {
+    font-size: 0.9rem;  /* Уменьшаем размер шрифта для цены */
+  }
+
+  .product-image {
+    width: 80%;  /* Сильно уменьшаем размер изображения */
+    max-width: 100px; /* Устанавливаем максимальный размер */
   }
 }

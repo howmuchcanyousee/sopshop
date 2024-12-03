@@ -1,22 +1,22 @@
+// src/pages/FavoritesPage.jsx
 import React from 'react';
-import './FavoritesPage.css';
 
-const FavoritesPage = ({ favorites }) => {
+const FavoritesPage = ({ favorites, removeFromFavorites }) => {
   return (
-    <div className="favorites-page">
+    <div>
       <h1>Избранное</h1>
       {favorites.length === 0 ? (
-        <p>Ваш список избранного пуст.</p>
+        <p>В вашем избранном пока нет товаров.</p>
       ) : (
-        <div className="favorite-items">
-          {favorites.map((item, index) => (
-            <div key={index} className="favorite-item">
-              <img src={item.image} alt={item.name} className="favorite-item-image" />
-              <div className="favorite-item-details">
-                <h3>{item.name}</h3>
-                <p>Размер: {item.size}</p>
-                <p>Цена: {item.price}₽</p>
-              </div>
+        <div>
+          {favorites.map((product) => (
+            <div key={product.id} className="favorite-item">
+              <img src={product.images[0]} alt={product.name} className="product-image" />
+              <h3>{product.name}</h3>
+              <p>{product.price} руб.</p>
+              <button onClick={() => removeFromFavorites(product.id)}>
+                Удалить из избранного
+              </button> {/* Кнопка для удаления из избранного */}
             </div>
           ))}
         </div>

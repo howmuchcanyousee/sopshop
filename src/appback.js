@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
+import CartPage from './pages/CartPage';
+import FavoritesPage from './pages/FavoritesPage';
 import './App.css';
 import banner1 from './assets/banner1.png';
 import banner2 from './assets/banner2.png';
 import banner3 from './assets/banner3.png';
 import banner4 from './assets/banner4.png';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import CartPage from './pages/CartPage';
-import FavoritesPage from './pages/FavoritesPage';
-function App() {
-  const [cart, setCart] = useState([]); // Это будет содержать товары в корзине
-  const [favorites, setFavorites] = useState([]); // Это будет содержать избранные товары
 
-  // Пример добавления товара в корзину или избранное
+export const CartContext = createContext();
+
+function App() {
+  const [cart, setCart] = useState([]); 
+  const [favorites, setFavorites] = useState([]); 
+// шаблон
   const addToCart = (product) => {
     setCart((prevCart) => [...prevCart, product]);
   };
+
   const addToFavorites = (product) => {
     setFavorites((prevFavorites) => [...prevFavorites, product]);
   };
+  const container = document.querySelector('.brands-container');
+  const items = document.querySelectorAll('.brand-item');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
 
   const banners = [banner1, banner2, banner3, banner4];
 
@@ -58,17 +62,6 @@ function App() {
     let scrollSpeed = 0.5;
     let position = 0;
 
-    // Функции для переключения баннеров
-const handleNext = () => {
-  setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
-};
-
-const handlePrev = () => {
-  setCurrentIndex((prevIndex) =>
-    prevIndex === 0 ? banners.length - 1 : prevIndex - 1
-  );
-};
-
     const scroll = () => {
       position -= scrollSpeed;
       if (position <= -items.length * (150 + 20)) {
@@ -80,6 +73,7 @@ const handlePrev = () => {
 
     scroll();
   }, []);
+
   const [zoomedImageIndex, setZoomedImageIndex] = useState(null); // Для увеличенного изображения
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -87,11 +81,10 @@ const handlePrev = () => {
     setIsModalOpen(true);
     setZoomedImageIndex(null); // Сбрасываем увеличение
   };
+  
   const handleImageClick = (index) => {
     setZoomedImageIndex(zoomedImageIndex === index ? null : index); // Увеличить или вернуть
   };
-  
-  
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -106,12 +99,19 @@ const handlePrev = () => {
     alert(`${action} добавлен: ${selectedProduct.name}, размер: ${selectedSize}`);
     closeModal();
   };
-  
+
   return (
-    <div className="App">
-      <Header />
-      {/* Секция с кнопками брендов */}
-      <div className="brands-slider">
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          {/* Главная страница */}
+          <Route
+            path="/"
+            element={
+              <>
+                {/* Секция с кнопками брендов */}
+                <div className="brands-slider">
         <div className="brands-container">
           <a href="/brand/nike" className="brand-item">
             <img
@@ -186,54 +186,74 @@ const handlePrev = () => {
         </div>
       </div>
 
-      {/* Секция с баннерами */}
-      <div className="banner-slider">
-        <div
-          className="banner-container"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
-        >
-          {banners.map((banner, index) => (
-            <div className="banner" key={index}>
-              <img src={banner} alt={`Banner ${index + 1}`} />
-            </div>
-          ))}
-        </div>
-      </div>
+                {/* Секция с баннерами */}
+                <div className="banner-slider">
+                  <div
+                    className="banner-container"
+                    style={{
+                      transform: `translateX(-${currentIndex * 100}%)`,
+                    }}
+                  >
+                    {banners.map((banner, index) => (
+                      <div className="banner" key={index}>
+                        <img src={banner} alt={`Banner ${index + 1}`} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
 
-      {/* Секция с новинками */}
-      <div className="new-products">
-        <h2 className="section-title">Новинки</h2>
-        <div className="products-container">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="product-item"
-              onClick={() => openModal(product)}
-            >
-              <img
-                src={product.images[0]}
-                alt={product.name}
-                className="product-image"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      
+                {/* Секция с новинками */}
+                <div className="new-products">
+                  <h2 className="section-title">Новинки</h2>
+                  <div className="products-container">
+                    {products.map((product) => (
+                      <div
+                        key={product.id}
+                        className="product-item"
+                        onClick={() => openModal(product)}
+                      >
+                        <img
+                          src={product.images[0]}
+                          alt={product.name}
+                          className="product-image"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            }
+          />
 
-      {/* Модальное окно */}
-      {isModalOpen && selectedProduct && (
+          {/* Страницы корзины и избранного */}
+          <Route path="/cart" element={<CartPage cart={cart} />} />
+          <Route
+            path="/favorites"
+            element={<FavoritesPage favorites={favorites} />}
+          />
+        </Routes>
+           
+
+       {/* Модальное окно */}
+{isModalOpen && selectedProduct && (
   <div className="modal-overlay" onClick={closeModal}>
-    <div
-      className="modal"
-      onClick={(e) => e.stopPropagation()}
-    >
+    <div className="modal" onClick={(e) => e.stopPropagation()}>
       <div className="modal-header">
         <h3 className="modal-title">{selectedProduct.name}</h3>
-        <button className="close-modal" onClick={closeModal}>✖</button>
+        <button className="close-modal" onClick={closeModal}>
+        </button>
+        <button className="close-modal" onClick={closeModal}>
+          <i className="fas fa-times"></i> 
+        </button>
+        
+        <button
+          className="add-to-favorites"
+          onClick={() => handleAddToCartOrFavorites('Избранное')}
+        >
+          <i className="fas fa-heart"></i>
+        </button>
       </div>
+
       <div className="modal-content">
         <div className="modal-images">
           {selectedProduct.images.map((image, index) => (
@@ -242,23 +262,21 @@ const handlePrev = () => {
               src={image}
               alt={`Product image ${index + 1}`}
               className={`modal-image ${zoomedImageIndex === index ? 'zoomed' : ''}`}
-              onClick={() => handleImageClick(index)} // Увеличение изображения
+              onClick={() => handleImageClick(index)}
             />
           ))}
         </div>
         <div className="modal-details">
-          <p>Выберите размер:</p>
           <select
             value={selectedSize}
             onChange={(e) => setSelectedSize(e.target.value)}
           >
-            <option value="">Выберите</option>
+            <option value="">Выберите размер</option>
             <option value="S">41</option>
             <option value="M">42</option>
             <option value="L">43</option>
-            <option value="XL">44</option>
-            <option value="XL">45</option>
           </select>
+          
         </div>
         <div className="modal-actions">
           <button
@@ -267,19 +285,18 @@ const handlePrev = () => {
           >
             Добавить в корзину
           </button>
-          <button
-            onClick={() => handleAddToCartOrFavorites('Избранное')}
-            className="modal-action-button"
-          >
-            Добавить в избранное
-          </button>
         </div>
       </div>
     </div>
   </div>
 )}
-    </div>
+
+
+              
+      </div>
+    </Router>
   );
 }
+
 
 export default App;
