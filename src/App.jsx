@@ -1,9 +1,10 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import BrandSlider from './components/BrandSlider';  // Импортируем слайдер
+import BrandSlider from './components/BrandSlider';  
 import Header from './components/Header';
 import CartPage from './pages/CartPage';
 import FavoritesPage from './pages/FavoritesPage';
+import BrandPage from './pages/BrandPage';  // Импортируем страницу бренда
 import './App.css';
 import banner1 from './assets/banner1.png';
 import banner2 from './assets/banner2.png';
@@ -28,7 +29,6 @@ function App() {
     { id: 4, name: 'Product 4', images: [require('./assets/new4.png')], price: 20000 },
     { id: 5, name: 'Product 5', images: [require('./assets/new5.png')], price: 18000 },
   ];
-  
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,8 +84,7 @@ function App() {
               path="/"
               element={
                 <>
-                <BrandSlider />
-                  {/* Баннеры */}
+                  <BrandSlider />
                   <div className="banner-slider">
                     <div
                       className="banner-container"
@@ -101,7 +100,6 @@ function App() {
                     </div>
                   </div>
 
-                  {/* Секция с товарами */}
                   <div className="new-products">
                     <h2 className="section-title">Новинки</h2>
                     <div className="products-container">
@@ -113,7 +111,11 @@ function App() {
                 </>
               }
             />
-            {/* Страницы корзины и избранного */}
+
+            {/* Страницы для каждого бренда */}
+            <Route path="/brand/:brandName" element={<BrandPage />} />
+
+            {/* Страница корзины и избранного */}
             <Route path="/cart" element={<CartPage />} />
             <Route path="/favorites" element={<FavoritesPage />} />
           </Routes>
@@ -128,12 +130,6 @@ function App() {
               <h3 className="modal-title">{selectedProduct.name}</h3>
               <button className="close-modal" onClick={closeModal}>
                 <i className="fas fa-times"></i>
-              </button>
-              <button
-                className="add-to-favorites"
-                onClick={() => handleAddToCartOrFavorites('Избранное')}
-              >
-                <i className="fas fa-heart"></i>
               </button>
             </div>
 
@@ -150,10 +146,7 @@ function App() {
                 ))}
               </div>
               <div className="modal-details">
-                <select
-                  value={selectedSize}
-                  onChange={(e) => setSelectedSize(e.target.value)}
-                >
+                <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}>
                   <option value="">Выберите размер</option>
                   <option value="S">41</option>
                   <option value="M">42</option>
@@ -182,10 +175,9 @@ const Product = ({ product, openModal }) => {
     <div className="product-item" onClick={() => openModal(product)}>
       <img src={product.images[0]} alt={product.name} className="product-image" />
       <h3>{product.name}</h3>
-      <p>{product.price} руб.</p>  {/* Здесь отображается цена */}
+      <p>{product.price} руб.</p>  {/* Отображаем цену */}
     </div>
   );
 };
-
 
 export default App;

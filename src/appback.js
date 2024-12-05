@@ -22,8 +22,7 @@ function App() {
   const addToFavorites = (product) => {
     setFavorites((prevFavorites) => [...prevFavorites, product]);
   };
-  const container = document.querySelector('.brands-container');
-  const items = document.querySelectorAll('.brand-item');
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
